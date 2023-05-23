@@ -26,7 +26,7 @@ void print_prompt(char **av, char **env)
 		char_num = getline(&string, &n, stdin);
 		if (char_num == -1)
 		{
-			free(string), exit(EXIT_FAILURE);		
+			free(string), exit(EXIT_FAILURE);
 		}
 		j = 0;
 		while (string[j])
@@ -38,7 +38,7 @@ void print_prompt(char **av, char **env)
 		k = 0;
 		argv[k] = strtok(string, " ");
 		while (argv[k])
-		{   
+		{
 			argv[++k] = strtok(NULL, " ");
 		}
 		child_id = fork();
