@@ -12,8 +12,7 @@
  */
 
 void print_prompt(char **av, char **env)
-{
-	char *string = NULL;
+{	char *string = NULL;
 	int status, j, k;
 	ssize_t char_num;
 	char *argv[MAX_COMMAND];
@@ -21,24 +20,20 @@ void print_prompt(char **av, char **env)
 	size_t n = 0;
 
 	while (1)
-	{
-		write(STDIN_FILENO, "#cisfun$ ", 9);
+	{	write(STDIN_FILENO, "#cisfun$ ", 9);
 		char_num = getline(&string, &n, stdin);
 		if (char_num == -1)
 		{
-			free(string), exit(EXIT_FAILURE);		
+			free(string), exit(EXIT_FAILURE);
 		}
-		j = 0;
-		while (string[j])
+		for (j = 0; string[j]; j++)
 		{
-			if (string[j] == '\n')
-				string[j] = 0;
-			j++;
+			string[j] == '\n' ? string[j] = 0 : 0;
 		}
 		k = 0;
 		argv[k] = strtok(string, " ");
 		while (argv[k])
-		{   
+		{
 			argv[++k] = strtok(NULL, " ");
 		}
 		child_id = fork();
@@ -48,8 +43,12 @@ void print_prompt(char **av, char **env)
 		}
 		if (child_id == 0)
 		{
-			if (execve(argv[0], argv, env) == -1)
-				printf("%s: No such file or directory\n", av[0]);
+		if (execve(argv[0], argv, env) == -1)
+		{
+		const char *msg = ": No such file or directory\n";
+			write(STDERR_FILENO, av[0], strlen(av[0]));
+			write(STDERR_FILENO, msg, strlen(msg));
+		}
 		}
 		else
 		wait(&status);
