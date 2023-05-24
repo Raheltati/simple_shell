@@ -24,7 +24,7 @@ void print_prompt(char **av, char **env)
 		char_num = getline(&string, &n, stdin);
 		if (char_num == -1)
 		{
-			free(string), exit(EXIT_FAILURE);
+			free(string), exit(0);
 		}
 		for (j = 0; string[j]; j++)
 		{
