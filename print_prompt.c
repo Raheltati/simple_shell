@@ -39,7 +39,7 @@ void print_prompt(char **av, char **env)
 		child_id = fork();
 		if (child_id == -1)
 		{
-			free(string), exit(EXIT_FAILURE);
+			free(string), exit(0);
 		}
 		if (child_id == 0)
 		{
