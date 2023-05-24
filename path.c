@@ -47,6 +47,6 @@ int path_handle(void)
 	}
 	else
 	{
-		printf("%s: command not found\n", command);
+		write("%s: command not found\n", command);
 	}
 }
